@@ -20,9 +20,10 @@
 		} 
 	}
 
-	$datediff = date_from_mysql($custom_fields['quote']['Til Dato']) - date_from_mysql($custom_fields['quote']['Fra Dato']);
-	$days_total = $datediff + 1;
-
+	if ($invoice->quote_number) {
+		$datediff = date_from_mysql($custom_fields['quote']['Til Dato']) - date_from_mysql($custom_fields['quote']['Fra Dato']);
+		$days_total = $datediff + 1;
+	}
 	?>
 
 	<!-- Code for summing the groups and their discount -->
@@ -177,8 +178,10 @@
 			<div id="project">
 				<hr id="fat">
 				<h1><?php echo $custom_fields['invoice']['Oppdrag']?></h1>
-				<?php _trans('invoice'); ?> for <?php echo strtolower(trans('quote')) . ' ' . $invoice->quote_number; ?>
-				<br><br>
+				<?php if ($invoice->quote_number) { ?>
+					<?php _trans('invoice'); ?> for <?php echo strtolower(trans('quote')) . ' ' . $invoice->quote_number; ?><br>
+				<?php } ?>
+				<br>
 				<b><?php echo trans('due_date') . ': '; ?></b><b><?php echo date_from_mysql($invoice->invoice_date_due, true); ?></b>
 				<br>
 				Betales til kontonr: <b><?php echo $custom_fields['user']['Kontonr']?></b><br>

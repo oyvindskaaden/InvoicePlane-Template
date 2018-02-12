@@ -20,8 +20,10 @@
 		} 
 	}
 
-	$datediff = date_from_mysql($custom_fields['quote']['Til Dato']) - date_from_mysql($custom_fields['quote']['Fra Dato']);
-	$days_total = $datediff + 1;
+	if ($invoice->quote_number) {
+		$datediff = date_from_mysql($custom_fields['quote']['Til Dato']) - date_from_mysql($custom_fields['quote']['Fra Dato']);
+		$days_total = $datediff + 1;
+	}
 
 	?>
 
@@ -177,7 +179,9 @@
 			<div id="project">
 				<hr id="fat">
 				<h1><?php echo $custom_fields['invoice']['Oppdrag']?></h1>
-				<?php _trans('invoice'); ?> for <?php echo strtolower(trans('quote')) . ' ' . $invoice->quote_number; ?>
+				<?php if ($invoice->quote_number) { ?>
+					<?php _trans('invoice'); ?> for <?php echo strtolower(trans('quote')) . ' ' . $invoice->quote_number; ?><br>
+				<?php } ?>
 				<br><br>
 				<b style="font-size: x-large;color:red;"><?php _trans('overdue'); ?></b><br>
 				<b style="color:red;"><?php echo trans('due_date') . ': '; ?></b><b style="color:red;"><?php echo date_from_mysql($invoice->invoice_date_due, true); ?></b>
