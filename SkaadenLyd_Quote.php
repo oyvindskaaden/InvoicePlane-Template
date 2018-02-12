@@ -10,17 +10,20 @@
 </head>
 <body>
 
-	<!-- Code for crating array of family groups-->
-	<?php 
-	$families = array();
+	<!-- Code for crating array of family groups and the length of the lease defined in the quote-->
+    <?php 
+    $families = array();
 
-	foreach ($items as $item) {
-		if (in_array($item->item_description, $families) == false) {
-			$families[] = $item->item_description;
-		} 
-	}
+    foreach ($items as $item) {
+        if (in_array($item->item_description, $families) == false) {
+            $families[] = $item->item_description;
+        } 
+    }
 
-	?>
+    $datediff = date_from_mysql($custom_fields['quote']['Til Dato']) - date_from_mysql($custom_fields['quote']['Fra Dato']);
+    $days_total = $datediff + 1;
+
+    ?>
 
 	<!-- Code for summing the groups and their discount -->
 	<?php 
