@@ -73,7 +73,7 @@ table.item-table {
     table-layout: fixed;
 }
 table.item-table tr:nth-child(2n-1) td {
-    background: #FAFAFA
+    background: #F6F6F6
 }
 table.item-table th {
     /*padding: 10px 15px;*/
