@@ -281,5 +281,6 @@
 			</div>
 		</main>
 	</div>
+	<watermarktext content="<?php _trans('overdue'); ?>" alpha="0.3" />
 </body>
 </html>

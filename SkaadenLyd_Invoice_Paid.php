@@ -282,5 +282,6 @@
 			</div>
 		</main>
 	</div>
+	<watermarktext content="<?php _trans('paid'); ?>" alpha="0.3" />
 </body>
 </html>
