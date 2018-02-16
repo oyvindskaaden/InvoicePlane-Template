@@ -389,7 +389,7 @@
 	<!-- Utleiebetingelser - Quote conditions -->
 	<div>
 		<h1>Utleiebetingelser <?php echo $quote->quote_number; ?></h1>
-		<p>Betingelsene gjelder for utleie av utstyr ihht. Spesifikasjoner i tilbud <b><?php echo $quote->quote_number; ?></b> i avtalt leieperiode. Ved å akseptere og signere dette tilbudet erkjenner leietaker seg kjent med følgende punkter:</p>
+		<p>Betingelsene gjelder for utleie av utstyr og/eller arbeid ihht. Spesifikasjoner i tilbud <b><?php echo $quote->quote_number; ?></b> i avtalt leieperiode. Ved å akseptere og signere dette tilbudet erkjenner leietaker seg kjent med følgende punkter:</p>
 		<ol style="list-style-type: decimal">
 			<li><b>Utleiers erstatningsansvar</b>
 				<ol style="list-style-type: lower-alpha">
