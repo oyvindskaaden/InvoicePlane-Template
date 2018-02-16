@@ -334,7 +334,7 @@
 				<div class="row">
 					<br><br>
 					<h3>Utleiebetingelser <?php echo $quote->quote_number; ?></h3><br>
-					<p>Betingelsene gjelder for utleie av utstyr ihht. Spesifikasjoner i tilbud <b><?php echo $quote->quote_number; ?></b> i avtalt leieperiode. Ved å akseptere og signere dette tilbudet erkjenner leietaker seg kjent med følgende punkter:</p>
+					<p>Betingelsene gjelder for utleie av utstyr og/eller ihht. Spesifikasjoner i tilbud <b><?php echo $quote->quote_number; ?></b> i avtalt leieperiode. Ved å akseptere og signere dette tilbudet erkjenner leietaker seg kjent med følgende punkter:</p>
 					<ol style="list-style-type: decimal">
 						<li><b>Utleiers erstatningsansvar</b>
 							<ol style="list-style-type: lower-alpha">
