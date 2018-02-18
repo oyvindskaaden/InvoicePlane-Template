@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title><?php _trans('invoice'); echo " " . $invoice->invoice_number; ?> - <?php echo $custom_fields['invoice']['Oppdrag']?></title>
+	<title><?php echo $invoice->user_company ?> - <?php _trans('invoice'); echo " " . $invoice->invoice_number; ?> - <?php echo $custom_fields['invoice']['Oppdrag']?></title>
 	<link rel="stylesheet"
 		  href="<?php echo base_url(); ?>assets/<?php echo get_setting('system_theme', 'invoiceplane'); ?>/css/templates.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/core/css/custom-pdf.css">
@@ -89,7 +89,7 @@
 		</table>
 	</htmlpagefooter>
 
-	<div>
+	<div <?php if($custom_fields['invoice']['Detaljert faktura']) : echo 'id="page"'; endif; ?>>
 		<!--<header>
 		</header-->
 		<main>
@@ -186,6 +186,7 @@
 				<br>
 				Betales til kontonr: <b><?php echo $custom_fields['user']['Kontonr']?></b><br>
 				Viktig at betalingen markeres med: <b style="color:red;"><?php echo $invoice->invoice_number; ?></b> (fakturanr.)
+				<?php if($custom_fields['invoice']['Detaljert faktura']) : echo "<br><br>På neste side finnes en detaljert liste for fakturaen."; endif; ?>
 				<hr>
 				<div id="price">
 					<table class="item-table">
@@ -279,5 +280,76 @@
 			</div>
 		</main>
 	</div>
+	<?php if($custom_fields['invoice']['Detaljert faktura']) : ?>
+		<h1>Detaljert liste for faktura <?php echo $invoice->invoice_number; ?></h1>
+		<?php 
+		$key = 0;
+		foreach ($families as $value) { ?>
+			<h2><?php echo htmlsc($value); ?></h2>
+			<table class="item-table">
+				<thead>
+					<tr>
+						<th class="item-amount-gp text-right" style="width:10%;"><?php _trans('qty'); ?></th>
+						<th class="item-name-gp" style="width:<?php if ($d_sums[$key] != 0){ echo '35%';} else { echo '50%';} ?>">
+							<?php _trans('description'); ?>
+						</th>
+						<th class="item-price-gp text-right" style="width:15%;"><?php _trans('price'); ?> per</th>
+						<?php if ($d_sums[$key] != 0) : ?>
+							<th class="item-discount text-right" style="width:15%;"><?php _trans('discount'); ?></th>
+						<?php endif; ?>
+						<th class="item-total-gp text-right" style="width:20%;"><?php _trans('total'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($items as $item) { ?>
+				<?php if ($item->item_description == $value) : ?>
+					<tr>
+						<td class="text-right">
+							<?php echo format_amount($item->item_quantity); ?>
+							<?php if ($item->item_product_unit) : ?>
+								<br>
+								<small><?php _htmlsc($item->item_product_unit); ?></small>
+							<?php endif; ?>
+						</td>
+						<td><?php _htmlsc($item->item_name); ?></td>
+						<td class="text-right">
+							<?php echo format_currency($item->item_price); ?>
+						</td>
+						<?php if ($d_sums[$key] != 0) : ?>
+							<td class="text-right">
+								<?php echo format_currency($item->item_discount); ?>
+							</td>
+						<?php endif; ?>
+						<td class="text-right">
+							<?php echo format_currency($item->item_total); ?>
+						</td>
+					</tr>
+				<?php endif; ?>
+				<?php } ?>
+				</tbody>
+				<tbody style="border-top: 1px solid #333" class="gpsums">
+					<?php if ($d_sums[$key] != 0): ?>
+					<tr>
+						<td colspan="4" style="border-top: 2px solid #444;" class="text-right">
+							<?php _trans('discount'); ?>
+						</td>
+						<td style="border-top: 2px solid #444;" class="text-right">
+							<?php echo format_currency($d_sums[$key]); ?>
+						</td>
+					</tr>
+					<?php endif; ?>
+					<tr>
+						<td <?php if ($d_sums[$key] != 0) { echo 'colspan="4"';} else { echo 'colspan="3" style="border-top: 2px solid #444;"';} ?> class="text-right">
+							<b><?php echo _trans('Sum') . " " . $value; ?></b>
+						</td>
+						<td <?php if ($d_sums[$key] != 0) { } else { echo 'style="border-top: 2px solid #444;"';} ?> class="text-right">
+							<b style="border-bottom: 4px double;"><?php echo format_currency($sums[$key]); ?></b>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<?php $key++; ?>
+		<?php } ?>
+	<?php endif; ?>
 </body>
 </html>

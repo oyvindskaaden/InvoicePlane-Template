@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title><?php _trans('quote'); echo " " . $quote->quote_number; ?> - <?php echo $custom_fields['quote']['Oppdrag']?></title>
+	<title><?php echo $quote->user_company ?> - <?php _trans('quote'); echo " " . $quote->quote_number; ?> - <?php echo $custom_fields['quote']['Oppdrag']?></title>
 	<link rel="stylesheet"
 		  href="<?php echo base_url(); ?>assets/<?php echo get_setting('system_theme', 'invoiceplane'); ?>/css/templates.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/core/css/custom-pdf.css">
