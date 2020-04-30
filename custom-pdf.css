@@ -119,7 +119,8 @@ footer {
     color: #77b632
 }
 #page {
-	page-break-after: always;
+    page-break-after: always;
+    padding-top: 150px;
 }
 table.info-table {
     width: 100;

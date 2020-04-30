@@ -194,21 +194,31 @@
 					<table class="item-table">
 						<thead>
 						<tr>
-							<th class="item-desc" style="width:80%"><?php _trans('description'); ?></th>
-							<th class="item-price text-right" style="width:20%"><?php _trans('price'); ?></th>
+							<th class="item-qty" style="width:10%"><?php _trans('qty'); ?></th>
+							<th class="item-job" style="width:15%"><?php _trans('job'); ?></th>
+							<th class="item-desc" style="width:60%"><?php _trans('description'); ?></th>
+							<th class="item-price text-right" style="width:15%"><?php _trans('price'); ?></th>
 						</tr>
 						</thead>
 						<tbody style="border-bottom: 1px solid #333">
 
-						<?php
-						$key = 0;
-						foreach ($families as $value) { ?>
-							<tr>
-								<td><?php echo _trans('Sum') . " " . $value; ?></td>
-								<td class="text-right"><?php echo format_currency($sums[$key]); ?></td>
-							</tr>
+						<?php foreach ($items as $item) { ?>
+						<tr>
+							<td class="text-right">
+								<?php echo format_amount($item->item_quantity); ?>
+								<?php if ($item->item_product_unit) : ?>
+									<br>
+									<small><?php _htmlsc($item->item_product_unit); ?></small>
+								<?php endif; ?>
+							</td>
+							<td><?php _htmlsc($item->item_name); ?></td>
+							<td><?php _htmlsc($item->item_description); ?></td>
+							<td class="text-right">
+								<?php echo format_currency($item->item_total); ?>
+							</td>
+						</tr>
+						<?php } ?>
 
-						<?php $key++; } ?>
 
 						</tbody>
 						<tbody class="invoice-sums">
