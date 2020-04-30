@@ -51,25 +51,27 @@
 
 
 	<htmlpageheader name="header">
-		<div id="toptextL">
-			<div id="logo"><?php echo invoice_logo_pdf(); ?></div>
-		</div>
-		<div id="toptextR">
-			<h2><b><?php echo trans('invoice') . ' ' . $invoice->invoice_number; ?></b></h2>
-			<table class="info">
-				<tr>
-					<td class="info"><b>Oppdrag:</b></td>
-					<td><b><?php echo $custom_fields['invoice']['Oppdrag']?></b></td>
-				</tr>
-				<tr>
-					<td class="info"><b><?php echo trans('invoice_date') . ':'; ?></b></td>
-					<td><b><?php echo date_from_mysql($invoice->invoice_date_created, true); ?></b></td>
-				</tr>
-				<tr>
-					<td class="info"><b><?php echo trans('due_date') . ': '; ?></b></td>
-					<td><b><?php echo date_from_mysql($invoice->invoice_date_due, true); ?></b></td>
-				</tr>
-			</table>
+		<div id="pdfHeader">
+			<div id="toptextL">
+				<div id="logo"><?php echo invoice_logo_pdf(); ?></div>
+			</div>
+			<div id="toptextR">
+				<h2><b><?php echo trans('invoice') . ' ' . $invoice->invoice_number; ?></b></h2>
+				<table class="info">
+					<tr>
+						<td class="info"><b>Oppdrag:</b></td>
+						<td><b><?php echo $custom_fields['invoice']['Oppdrag']?></b></td>
+					</tr>
+					<tr>
+						<td class="info"><b><?php echo trans('invoice_date') . ':'; ?></b></td>
+						<td><b><?php echo date_from_mysql($invoice->invoice_date_created, true); ?></b></td>
+					</tr>
+					<tr>
+						<td class="info"><b><?php echo trans('due_date') . ': '; ?></b></td>
+						<td><b><?php echo date_from_mysql($invoice->invoice_date_due, true); ?></b></td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</htmlpageheader>
 
