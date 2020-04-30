@@ -188,3 +188,7 @@ table.signature {
 div.sign {
     page-break-inside: avoid;
 }
+#pdfHeader {
+    width: 100%;
+    height: 100px;
+}
