@@ -10,46 +10,6 @@
 </head>
 <body>
 
-	<!-- Code for crating array of family groups and the length of the lease defined in the quote-->
-	<?php 
-	$families = array();
-
-	foreach ($items as $item) {
-		if (in_array($item->item_description, $families) == false) {
-			$families[] = $item->item_description;
-		} 
-	}
-
-	if ($invoice->quote_number) {
-		$datediff = date_from_mysql($custom_fields['quote']['Til Dato']) - date_from_mysql($custom_fields['quote']['Fra Dato']);
-		$days_total = $datediff + 1;
-	}
-	?>
-
-	<!-- Code for summing the groups and their discount -->
-	<?php 
-	$sums = array();
-	$d_sums = array();
-	$key = 0;
-	
-	foreach ($families as $value) {
-		$sums[$key] = 0;
-		$d_sums[$key] = 0;
-		foreach ($items as $item) {
-			if ($item->item_description == $value){
-				$sums[$key] += $item->item_total;
-				$d_sums[$key] += $item->item_discount;
-				//echo "<h3>" . $sums[$key] . " and " . $d_sums[$key] . " and " . $key . "</h3>";
-			}
-			
-		}
-		//echo "<h3>" . $sums[$key] . " and " . $d_sums[$key] . "</h3>";
-		$key++;
-	}
-	$key = 0;
-	?>
-
-
 	<htmlpageheader name="header">
 		<div id="pdfHeader">
 			<div id="toptextL">
@@ -193,8 +153,8 @@
 					<table class="item-table">
 						<thead>
 						<tr>
-							<th class="item-job" style="width:20%">Jobb</th>
-							<th class="item-desc" style="width:60%">Beskrivelse</th>
+							<th class="item-job" style="width:15%">Jobb</th>
+							<th class="item-desc" style="width:65%">Beskrivelse</th>
 							<th class="item-price text-right" style="width:20%">Pris</th>
 						</tr>
 						</thead>
