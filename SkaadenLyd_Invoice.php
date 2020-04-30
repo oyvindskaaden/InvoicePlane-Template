@@ -193,9 +193,9 @@
 					<table class="item-table">
 						<thead>
 						<tr>
-							<th class="item-job" style="width:15%">Jobb</th>
+							<th class="item-job" style="width:20%">Jobb</th>
 							<th class="item-desc" style="width:60%">Beskrivelse</th>
-							<th class="item-price text-right" style="width:15%">Pris</th>
+							<th class="item-price text-right" style="width:20%">Pris</th>
 						</tr>
 						</thead>
 						<tbody style="border-bottom: 1px solid #333">
