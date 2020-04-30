@@ -164,7 +164,8 @@ td.info {
 	header: html_header;
 	margin-top: 20;
 	margin-header: 50;
-	footer: html_footer;
+    footer: html_footer;
+    padding-top: 150px;
 }
 #pageHeader {
     	padding: 5px 0;
@@ -193,5 +194,5 @@ div.sign {
     height: 100px;
 }
 main {
-    padding-top: 100px;
+    padding-top: 150px;
 }
