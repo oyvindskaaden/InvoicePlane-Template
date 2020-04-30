@@ -131,6 +131,9 @@
 						<?php if ($invoice->client_zip) {
 							echo htmlsc($invoice->client_zip) . '<br>';
 						} ?>
+						<?php if ($invoice->client_mobile) {
+						echo '<div>' . trans('phone_abbr') . ': ' . htmlsc($invoice->client_mobile) . '</div>';
+						} ?>
 						<?php if ($invoice->client_phone) {
 							echo trans('phone_abbr') . ': ' . htmlsc($invoice->client_phone); ?>
 							<br>
@@ -163,6 +166,9 @@
 						} ?>
 						<?php if ($invoice->user_zip) {
 							echo htmlsc($invoice->user_zip) . '<br>';
+						} ?>
+						<?php if ($invoice->user_mobile) {
+							echo '<div>' . trans('phone_abbr') . ': ' . htmlsc($invoice->user_mobile) . '</div>';
 						} ?>
 						<?php if ($invoice->user_phone) { ?><?php echo trans('phone_abbr'); ?>: <?php echo htmlsc($invoice->user_phone); ?>
 							<br><?php } ?>
@@ -286,7 +292,84 @@
 				<b>Dersom betaling ikke merkes med fakturanr (rød tekst),<br> vil ikke betalingen bli registrert.</b><br>
 			</div>
 		</div><!-- .invoice -->
+		<?php if($custom_fields['invoice']['Detaljert faktura']) : ?>
+			<br><br><br>
+			<h3>Detaljert liste for faktura <?php echo $invoice->invoice_number; ?></h3><br>
+			<div class="invoice-items">
+				<div class="table-responsive">
+					<?php 
+					$key = 0;
+					foreach ($families as $value) { ?>
+						<h4><?php echo htmlsc($value); ?></h4>
+						<table style="width:100%;" class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th class="item-amount-gp text-right" style="width:10%;"><?php _trans('qty'); ?></th>
+									<th class="item-name-gp" style="width:<?php if ($d_sums[$key] != 0){ echo '35%';} else { echo '50%';} ?>">
+										<?php _trans('description'); ?>
+									</th>
+									<th class="item-price-gp text-right" style="width:15%;"><?php _trans('price'); ?> per</th>
+									<?php if ($d_sums[$key] != 0) : ?>
+										<th class="item-discount text-right" style="width:15%;"><?php _trans('discount'); ?></th>
+									<?php endif; ?>
+									<th class="item-total-gp text-right" style="width:20%;"><?php _trans('total'); ?></th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php foreach ($items as $item) { ?>
+							<?php if ($item->item_description == $value) : ?>
+								<tr>
+									<td class="text-right">
+										<?php echo format_amount($item->item_quantity); ?>
+										<?php if ($item->item_product_unit) : ?>
+											<br>
+											<small><?php _htmlsc($item->item_product_unit); ?></small>
+										<?php endif; ?>
+									</td>
+									<td><?php _htmlsc($item->item_name); ?></td>
+									<td class="text-right">
+										<?php echo format_currency($item->item_price); ?>
+									</td>
+									<?php if ($d_sums[$key] != 0) : ?>
+										<td class="text-right">
+											<?php echo format_currency($item->item_discount); ?>
+										</td>
+									<?php endif; ?>
+									<td class="text-right">
+										<?php echo format_currency($item->item_total); ?>
+									</td>
+								</tr>
+							<?php endif; ?>
+							<?php } ?>
+							</tbody>
+							<tbody style="border-top: 1px solid #333" class="gpsums">
+								<?php if ($d_sums[$key] != 0): ?>
+								<tr>
+									<td colspan="4" style="border-top: 2px solid #444;" class="text-right">
+										<?php _trans('discount'); ?>
+									</td>
+									<td style="border-top: 2px solid #444;" class="text-right">
+										<?php echo format_currency($d_sums[$key]); ?>
+									</td>
+								</tr>
+								<?php endif; ?>
+								<tr>
+									<td <?php if ($d_sums[$key] != 0) { echo 'colspan="4"';} else { echo 'colspan="3" style="border-top: 2px solid #444;"';} ?> class="text-right">
+										<b><?php echo _trans('Sum') . " " . $value; ?></b>
+									</td>
+									<td <?php if ($d_sums[$key] != 0) { } else { echo 'style="border-top: 2px solid #444;"';} ?> class="text-right">
+										<b style="border-bottom: 4px double;"><?php echo format_currency($sums[$key]); ?></b>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<?php $key++; ?>
+					<?php } ?>
+				</div>
+			</div>
+		<?php endif; ?>
 	</div><!-- #content -->
+
 </div>
 
 </body>
