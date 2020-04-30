@@ -224,13 +224,13 @@
 						<tbody class="invoice-sums">
 
 						<tr>
-							<td class="text-right" style="border-top: 2px solid #000;"><?php _trans('subtotal'); ?></td>
+							<td colspan="3" class="text-right" style="border-top: 2px solid #000;"><?php _trans('subtotal'); ?></td>
 							<td style="border-top: 2px solid #000;" class="text-right"><?php echo format_currency($invoice->invoice_item_subtotal); ?></td>
 						</tr>
 
 						<?php if ($invoice->invoice_item_tax_total > 0) { ?>
 							<tr>
-								<td class="text-right">
+								<td colspan="3" class="text-right">
 									<?php _trans('item_tax'); ?>
 								</td>
 								<td class="text-right">
@@ -241,7 +241,7 @@
 
 						<?php foreach ($invoice_tax_rates as $invoice_tax_rate) : ?>
 							<tr>
-								<td class="text-right">
+								<td colspan="3" class="text-right">
 									<?php echo $invoice_tax_rate->invoice_tax_rate_name . ' (' . format_amount($invoice_tax_rate->invoice_tax_rate_percent) . '%)'; ?>
 								</td>
 								<td class="text-right">
@@ -252,7 +252,7 @@
 
 						<?php if ($invoice->invoice_discount_percent != '0.00') : ?>
 							<tr>
-								<td class="text-right">
+								<td colspan="3" class="text-right">
 									<?php _trans('discount'); ?>
 								</td>
 								<td class="text-right">
@@ -262,7 +262,7 @@
 						<?php endif; ?>
 						<?php if ($invoice->invoice_discount_amount != '0.00') : ?>
 							<tr>
-								<td class="text-right">
+								<td colspan="3" class="text-right">
 									<?php _trans('discount'); ?>
 								</td>
 								<td class="text-right">
@@ -272,7 +272,7 @@
 						<?php endif; ?>
 
 						<tr>
-							<td class="text-right">
+							<td colspan="3" class="text-right">
 								<b><?php _trans('total')?> å betale</b>
 							</td>
 							<td class="text-right">
